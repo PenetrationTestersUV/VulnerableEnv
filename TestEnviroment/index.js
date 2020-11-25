@@ -32,15 +32,21 @@ app.post('/login', function(request, response) {
     console.log(username, password);
     if (username && password) {
 // check if user exists
-        connection.query(`SELECT * FROM users WHERE username = ${username} AND password = ${password}`, function(error, results, fields) {
-            if (results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                response.redirect('/home');
-            } else {
-                response.send('Incorrect Username and/or Password!');
-            }           
-            response.end();
+        connection.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
+            if(error){
+                console.log(error);
+                response.send('Error 404 - Not found');
+                response.end();
+            } else{
+                if (results.length > 0) {
+                    request.session.loggedin = true;
+                    request.session.username = username;
+                    response.redirect('/home');
+                } else {
+                    response.send('Incorrect Username and/or Password!');
+                }           
+                response.end();
+            }   
         });
     } else {
         response.send('Please enter Username and Password!');
