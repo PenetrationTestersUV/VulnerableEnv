@@ -25,6 +25,10 @@ app.get('/', function(request, response) {
     response.sendFile(path.join(__dirname + '/client/index.html'));
 });
 
+app.get('/home', function(request, response) {
+    response.sendFile(path.join(__dirname + '/client/home/home.html'));
+});
+
 // for action
 app.post('/login', function(request, response) {
     var username = request.body.username;
