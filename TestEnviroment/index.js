@@ -13,6 +13,8 @@ var connection = mysql.createConnection({
     database : 'auth'
 });
 
+var user_session = false;
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -26,7 +28,11 @@ app.get('/', function(request, response) {
 });
 
 app.get('/home', function(request, response) {
-    response.sendFile(path.join(__dirname + '/client/home/home.html'));
+    if(user_session == true){
+        response.sendFile(path.join(__dirname + '/client/home/home.html'));
+    } else {
+        response.redirect("/")
+    }
 });
 
 // for action
@@ -45,6 +51,7 @@ app.post('/login', function(request, response) {
                 if (results.length > 0) {
                     request.session.loggedin = true;
                     request.session.username = username;
+                    user_session = true;
                     response.redirect('/home');
                 } else {
                     response.send('Incorrect Username and/or Password!');
