@@ -1,0 +1,17 @@
+.sidebar-nav {
+    height: 100vh;
+}
+
+.sidebar-content {
+    margin-top: 10vh;
+    color: white;
+}
+
+.sidebar-item {
+    color: white;
+}
+
+.sidebar-content :hover {
+    background-color: chocolate;
+    color: white;
+}

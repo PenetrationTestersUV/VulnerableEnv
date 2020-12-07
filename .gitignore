@@ -1,1 +1,4 @@
 TestEnviroment/node_modules/
+package-lock.json
+fvwa/.eslintcache
+fvwa/package-lock.json
