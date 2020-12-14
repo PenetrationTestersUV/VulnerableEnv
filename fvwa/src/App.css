@@ -15,3 +15,23 @@
     background-color: chocolate;
     color: white;
 }
+
+.vertical-center-content{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.panel-form-container{  
+    border: 1px solid;
+    color:gray;
+    border-radius: 15px;
+}
+
+.output-size{
+    height:85vh;
+}
+
+.tile-response-panel{
+    font-size: 20px;
+    
+}

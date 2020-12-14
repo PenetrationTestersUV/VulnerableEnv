@@ -1,13 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import {InjectionDataMenu} from './DataMenu'
 
 function NavigationBar() {
     return (
         <div className="sidebar-nav">
             <nav class="nav flex-column sidebar-content">
-                <a class="nav-link sidebar-item" href="#">Active</a>
-                <a class="nav-link sidebar-item" href="#">Link</a>
-                <a class="nav-link sidebar-item" href="#">Link</a>
-                <a class="nav-link sidebar-item" href="#">Disabled</a>
+                {
+                    InjectionDataMenu.map( item => {
+                        return (
+                            <Link to={item.url} class="nav-link sidebar-item">
+                                {item.title}
+                            </Link>
+                        )
+                    })
+                }
             </nav>
         </div>
     );
