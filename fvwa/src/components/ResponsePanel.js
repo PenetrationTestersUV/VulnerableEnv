@@ -1,13 +1,16 @@
-import React from 'react'
+import React, {  Component } from 'react'
 
-const ResponsePanel = () => {
+function ResponsePanel({messagge}) {
+
     return (
         <div className="response-panel-container">
             <div className="tile-response-panel">
                 <h1>Salida</h1>
             </div>
-            <div class="input-group">
-                <textarea class="form-control output-size" readOnly></textarea>
+            <div className="input-group">
+                <div>
+                    {messagge}
+                </div>
             </div>
         </div>
     )
