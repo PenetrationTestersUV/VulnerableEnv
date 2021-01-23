@@ -4,12 +4,15 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
 var app = express();
+var cors = require('cors');
+
 app.use(express.static('client'));
+app.use(cors());
 
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'password',
+    password : 'reach2552',
     database : 'auth'
 });
 
@@ -20,11 +23,13 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 app.get('/', function(request, response) {
-    response.sendFile(path.join(__dirname + '/client/index.html'));
+    response.send('Welcome back, ' + '!');
+    //response.sendFile(path.join(__dirname + '/client/index.html'));
 });
 
 app.get('/home', function(request, response) {
@@ -45,22 +50,22 @@ app.post('/login', function(request, response) {
         connection.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
             if(error){
                 console.log(error);
-                response.send('Error 404 - Not found');
+                response.send( {message:'Error 404 - Not found'});
                 response.end();
             } else{
                 if (results.length > 0) {
-                    request.session.loggedin = true;
-                    request.session.username = username;
+                    //request.session.loggedin = true;
+                    //request.session.username = username;
                     user_session = true;
-                    response.redirect('/home');
+                    response.send({logged: user_session});
                 } else {
-                    response.send('Incorrect Username and/or Password!');
-                }           
+                    response.send({message: 'Incorrect Username and/or Password!'});
+                }
                 response.end();
-            }   
+            }
         });
     } else {
-        response.send('Please enter Username and Password!');
+        response.send( {message: 'Please enter Username and Password!'});
         response.end();
     }
 });
