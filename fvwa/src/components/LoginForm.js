@@ -3,7 +3,6 @@ import '../css/style.css'
 import BackGround from '../img/bg.svg'
 import Icon_Avatar from '../img/avatar.svg'
 import BG_Wave from '../img/wave.png'
-import mensaje from './mensaje';
 import { UserConsumer, UserContext } from './UserProvider'
 const axios = require('axios');
 
@@ -36,8 +35,10 @@ function LoginForm() {
             mode: 'cors',
             body: bodyReq
         })
-        console.log(response);
         const datos = await response.json();
+        if(datos.message) {
+            console.log(datos.message);
+        }
         if(datos.logged === true) {
             LoginUser(datos.logged)
         }      

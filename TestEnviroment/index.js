@@ -46,6 +46,7 @@ app.post('/login', function(request, response) {
     var password = request.body.password;
     console.log(username, password);
     if (username && password) {
+        var query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
 // check if user exists
         connection.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`, function(error, results, fields) {
             if(error){
@@ -59,7 +60,7 @@ app.post('/login', function(request, response) {
                     user_session = true;
                     response.send({logged: user_session});
                 } else {
-                    response.send({message: 'Incorrect Username and/or Password!'});
+                    response.send({message: query});
                 }
                 response.end();
             }
