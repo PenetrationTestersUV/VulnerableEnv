@@ -1,0 +1,1 @@
+console.log("Alto ahi, esta opcion es solo para desarrolladores, no se te ocurro ninguna cosa rara como el inyectar codigo, pierdes el tiempo buddy");
